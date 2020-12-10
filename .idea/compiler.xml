@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="org.wso2.carbon.queuing" />
+        <module name="org.wso2.carbon.registry.api" />
+        <module name="org.wso2.carbon.core.commons.stub" />
+        <module name="org.wso2.carbon.base" />
+        <module name="org.wso2.carbon.server.admin.ui" />
+        <module name="org.wso2.carbon.bridge" />
+        <module name="javax.cache.wso2" />
+        <module name="org.wso2.carbon.integration.test.common.integration.test.utils" />
+        <module name="org.wso2.carbon.server.admin.common" />
+        <module name="org.wso2.carbon.student.mgt" />
+        <module name="org.wso2.carbon.kernel.integration.test" />
+        <module name="org.wso2.carbon.server.admin.stub" />
+        <module name="org.wso2.carbon.ui.menu.registry" />
+        <module name="org.wso2.carbon.ui.menu.general" />
+        <module name="org.wso2.carbon.coordination.core" />
+        <module name="org.wso2.sample.user.store.manager" />
+        <module name="org.wso2.carbon.cluster.mgt.core" />
+        <module name="org.wso2.carbon.addressing" />
+        <module name="org.wso2.carbon.roles.mgt.stub" />
+        <module name="org.wso2.carbon.feature.mgt.core" />
+        <module name="org.wso2.carbon.coordination.common" />
+        <module name="org.wso2.carbon.integretion.test.common.admin.extensions" />
+        <module name="org.wso2.carbon.server.admin" />
+        <module name="SecVerifier" />
+        <module name="org.wso2.carbon.framework.exporter" />
+        <module name="org.wso2.carbon.ui.menu.tools" />
+        <module name="org.wso2.carbon.core.services" />
+        <module name="org.wso2.carbon.integretion.test.common.ui.pages" />
+        <module name="org.wso2.carbon.feature.mgt.stub" />
+        <module name="Axis2SampleService" />
+        <module name="org.wso2.carbon.ui.menu.governance" />
+        <module name="org.wso2.carbon.http.bridge" />
+        <module name="org.wso2.carbon.application.deployer" />
+        <module name="org.wso2.carbon.securevault" />
+        <module name="org.wso2.carbon.tomcat.ext" />
+        <module name="org.wso2.carbon.registry.core" />
+        <module name="org.wso2.carbon.feature.mgt.ui" />
+        <module name="org.wso2.carbon.integration.test.common.admin.clients" />
+        <module name="org.wso2.carbon.ndatasource.common" />
+        <module name="org.wso2.carbon.pax-logging-log4j2-plugins" />
+        <module name="org.wso2.carbon.i18n" />
+        <module name="org.wso2.carbon.registry.server" />
+        <module name="org.wso2.carbon.server" />
+        <module name="org.wso2.carbon.servletbridge" />
+        <module name="org.wso2.carbon.core" />
+        <module name="wso2carbon" />
+        <module name="org.wso2.carbon.student.mgt.ui.feature" />
+        <module name="org.wso2.carbon.core.bootup.validator" />
+        <module name="SampleServletTest" />
+        <module name="org.wso2.carbon.bootstrap" />
+        <module name="org.wso2.carbon.ndatasource.rdbms" />
+        <module name="org.wso2.carbon.roles.mgt.ui" />
+        <module name="org.wso2.carbon.authenticator.proxy" />
+        <module name="org.wso2.carbon.tomcat" />
+        <module name="org.wso2.carbon.styles" />
+        <module name="org.wso2.carbon.ui" />
+        <module name="org.wso2.carbon.roles.mgt" />
+        <module name="org.wso2.carbon.osgi.security" />
+        <module name="org.wso2.carbon.student.mgt.ui" />
+        <module name="org.wso2.carbon.utils" />
+        <module name="org.wso2.carbon.user.core" />
+        <module name="org.wso2.carbon.ndatasource.core" />
+        <module name="org.wso2.carbon.user.api" />
+        <module name="org.wso2.carbon.feature.mgt.services" />
+        <module name="org.wso2.carbon.authenticator.stub" />
+        <module name="org.wso2.carbon.core.common" />
+        <module name="org.wso2.carbon.registry.xboot" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
