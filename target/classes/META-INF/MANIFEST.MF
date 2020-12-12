@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1607544590510
+Bnd-LastModified: 1607798559182
 Build-Jdk: 1.8.0_261
 Built-By: nishothan
 Bundle-ManifestVersion: 2
@@ -7,7 +7,6 @@ Bundle-Name: org.wso2.sample.user.store.manager
 Bundle-SymbolicName: org.wso2.sample.user.store.manager
 Bundle-Version: 1.0.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
-DynamicImport-Package: *
 Export-Package: org.wso2.sample.user.store.manager;uses:="org.wso2.carbo
  n.user.api,org.wso2.carbon.user.core,org.wso2.carbon.user.core.claim,or
  g.wso2.carbon.user.core.common,org.wso2.carbon.user.core.jdbc,org.wso2.
@@ -20,10 +19,9 @@ Import-Package: org.osgi.service.component;version="[1.2.0,2.0.0)",org.w
  e.profile;version="[4.5.0,5.0.0)",org.wso2.carbon.user.core.service;ver
  sion="[4.5.0,5.0.0)",org.wso2.carbon.user.core.util;version="[4.5.0,5.0
  .0)",org.apache.commons.logging;version="[1.2.0,2.0.0)",org.osgi.framew
- ork;version="[1.7.0,2.0.0)",org.jasypt.util.password;resolution:=option
- al,org.wso2.sample.user.store.manager;resolution:=optional,org.wso2.car
- bon.utils;version="[4.5.0,5.0.0)",javax.servlet;version="2.4.0",javax.s
- ervlet.http;version="2.4.0"
+ ork;version="[1.7.0,2.0.0)",org.wso2.sample.user.store.manager;resoluti
+ on:=optional,org.wso2.carbon.utils;version="[4.5.0,5.0.0)",javax.servle
+ t;version="2.4.0",javax.servlet.http;version="2.4.0"
 Require-Capability: osgi.service;filter:="(objectClass=org.wso2.carbon.u
  ser.core.service.RealmService)";effective:=active,osgi.ee;filter:="(&(o
  sgi.ee=JavaSE)(version=1.8))"

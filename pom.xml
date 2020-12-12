@@ -41,29 +41,21 @@
             <scope>provided</scope>
             <version>1.2.10</version>
         </dependency>
-        <dependency>
-            <groupId>org.jasypt</groupId>
-            <artifactId>jasypt</artifactId>
-            <version>1.9.0</version>
-        </dependency>
     </dependencies>
 
     <build>
-
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
-                    <inherited>true</inherited>
-                    <configuration>
-                        <encoding>UTF-8</encoding>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
-                </plugin>
-
-
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
 
             <plugin>
             <groupId>org.apache.felix</groupId>
@@ -82,7 +74,6 @@
                         org.wso2.sample.user.store.manager.*,
                     </Export-Package>
                     <Import-Package>
-
                         org.osgi.service.component.*;version="${osgi.service.component.imp.pkg.version.range}",
                         org.wso2.carbon.user.api; version="${carbon.user.api.imp.pkg.version.range}",
                         org.wso2.carbon.user.core.*; version="${carbon.kernel.package.import.version.range}",
@@ -92,13 +83,9 @@
 
                         javax.servlet; version=2.4.0,
                         javax.servlet.http; version=2.4.0,
-                        org.wso2.carbon.base.*,
-                        org.wso2.carbon.user.core.*,
 
                         *;resolution:=optional
                     </Import-Package>
-                    <DynamicImport-Package>*</DynamicImport-Package>
-
                 </instructions>
             </configuration>
         </plugin>
@@ -111,7 +98,6 @@
         <carbon.kernel.package.import.version.range>[4.5.0, 5.0.0)</carbon.kernel.package.import.version.range>
         <import.package.version.commons.logging>[1.2.0,2.0.0)</import.package.version.commons.logging>
         <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
-
         <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
     </properties>
 </project>

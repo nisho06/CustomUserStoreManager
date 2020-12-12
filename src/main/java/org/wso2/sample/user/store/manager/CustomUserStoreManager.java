@@ -19,7 +19,6 @@ package org.wso2.sample.user.store.manager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.wso2.carbon.CarbonConstants;
 import org.wso2.carbon.user.api.Properties;
 import org.wso2.carbon.user.api.Property;
@@ -56,8 +55,7 @@ import java.util.Map;
  */
 public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
 
-    private static Log log = LogFactory.getLog(CustomUserStoreManager.class);
-    private static StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+    private static final Log log = LogFactory.getLog(CustomUserStoreManager.class);
 
     public CustomUserStoreManager() {
 
@@ -76,7 +74,7 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
      *
      * @param input The String password which needs to be hashed using the particular algorithm.
      * @return The byte array of hashed password.
-     * @throws NoSuchAlgorithmException
+     * @throws NoSuchAlgorithmException //no such algorithm which is defined
      */
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
 
@@ -88,7 +86,7 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
      * Byte array has been converted into hex format to get the MessageDigest.
      *
      * @param hash Byte array which contains hashed password
-     * @return
+     * @return final hashed hexString
      */
     public static String toHexString(byte[] hash) {
 
@@ -114,19 +112,11 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
         }
 
         int givenMax;
-        int searchTime;
         try {
             givenMax = Integer
                     .parseInt(realmConfig.getUserStoreProperty(UserCoreConstants.RealmConfig.PROPERTY_MAX_USER_LIST));
         } catch (NumberFormatException e) {
             givenMax = UserCoreConstants.MAX_USER_ROLE_LIST;
-        }
-
-        try {
-            searchTime = Integer
-                    .parseInt(realmConfig.getUserStoreProperty(UserCoreConstants.RealmConfig.PROPERTY_MAX_SEARCH_TIME));
-        } catch (NumberFormatException e) {
-            searchTime = UserCoreConstants.MAX_SEARCH_TIME;
         }
 
         if (maxItemLimit < 0 || maxItemLimit > givenMax) {
@@ -184,7 +174,7 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
             }
             rs.close();
 
-            if (userList.size() > 0) {
+            if (!userList.isEmpty()) {
                 users = userList;
             }
 
@@ -281,7 +271,7 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
                 try {
                     password = toHexString(getSHA(credential.toString()));
                 } catch (NoSuchAlgorithmException e) {
-                    String msg = "Exception thrown for incorrect algorithm: ";
+                    String msg = "Exception thrown for incorrect algorithm: SHA256 ";
                     if (log.isDebugEnabled()) {
                         log.debug(msg, e);
                     }
@@ -310,100 +300,6 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
     }
 
     @Override
-    public AuthenticationResult doAuthenticateWithID(String preferredUserNameProperty, String preferredUserNameValue,
-                                                     Object credential, String profileName) throws UserStoreException {
-
-        // If the user is trying to authenticate with username.
-        if (preferredUserNameProperty.equals(getUserNameMappedAttribute())) {
-            return doAuthenticateWithUserName(preferredUserNameValue, credential);
-        }
-
-        AuthenticationResult authenticationResult = new AuthenticationResult(
-                AuthenticationResult.AuthenticationStatus.FAIL);
-        User user;
-
-        if (!isValidCredentials(credential)) {
-            String reason = "Password validation failed";
-            if (log.isDebugEnabled()) {
-                log.debug(reason);
-            }
-            return getAuthenticationResult(reason);
-        }
-
-        // add the properties
-        if (profileName == null) {
-            profileName = UserCoreConstants.DEFAULT_PROFILE;
-        }
-
-        Connection dbConnection = null;
-        ResultSet rs = null;
-        PreparedStatement prepStmt = null;
-        String sqlstmt;
-        String password;
-        boolean isAuthed = false;
-
-        try {
-
-            dbConnection = getDBConnection();
-            dbConnection.setAutoCommit(false);
-
-            sqlstmt = "SELECT ID,USERNAME,PASSWORD FROM USERS WHERE USERNAME=?";
-
-            if (log.isDebugEnabled()) {
-                log.debug(sqlstmt);
-            }
-
-            prepStmt = dbConnection.prepareStatement(sqlstmt);
-            prepStmt.setString(1, preferredUserNameProperty);
-            prepStmt.setString(2, preferredUserNameValue);
-            prepStmt.setString(3, profileName);
-
-            rs = prepStmt.executeQuery();
-
-            int count = 0;
-            while (rs.next()) {
-                // Handle multiple matching users.
-                count++;
-                if (count > 1) {
-                    String reason = "Invalid scenario. Multiple users found for the given username property: "
-                            + preferredUserNameProperty + " and value: " + preferredUserNameValue;
-                    if (log.isDebugEnabled()) {
-                        log.debug(reason);
-                    }
-                    return getAuthenticationResult(reason);
-                }
-
-                String userID = rs.getString(1);
-                String userName = rs.getString(2);
-                String storedPassword = rs.getString(3);
-                if ((storedPassword != null) && (storedPassword.equals(credential))) {
-                    isAuthed = true;
-                    user = getUser(userID, userName);
-                    user.setPreferredUsername(preferredUserNameProperty);
-                    authenticationResult = new AuthenticationResult(
-                            AuthenticationResult.AuthenticationStatus.SUCCESS);
-                    authenticationResult.setAuthenticatedUser(user);
-                }
-            }
-        } catch (SQLException e) {
-            String msg =
-                    "Error occurred while retrieving user authentication info for user : " + preferredUserNameValue;
-            if (log.isDebugEnabled()) {
-                log.debug(msg, e);
-            }
-            throw new UserStoreException("Authentication Failure", e);
-        } finally {
-            DatabaseUtil.closeAllConnections(dbConnection, rs, prepStmt);
-        }
-
-        if (log.isDebugEnabled()) {
-            log.debug("User " + preferredUserNameValue + " login attempt. Login success: " + isAuthed);
-        }
-
-        return authenticationResult;
-    }
-
-    @Override
     protected String doGetUserIDFromUserNameWithID(String userName) throws UserStoreException {
 
         if (userName == null) {
@@ -421,9 +317,7 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
             sqlStmt = "SELECT ID FROM USERS WHERE USERNAME=?";
             prepStmt = dbConnection.prepareStatement(sqlStmt);
             prepStmt.setString(1, userName);
-            if (sqlStmt.contains(UserCoreConstants.UM_TENANT_COLUMN)) {
-                prepStmt.setInt(2, tenantId);
-            }
+
             rs = prepStmt.executeQuery();
             while (rs.next()) {
                 userID = rs.getString(1);
