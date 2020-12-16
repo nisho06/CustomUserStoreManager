@@ -196,12 +196,13 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
     public org.wso2.carbon.user.api.Properties getDefaultUserStoreProperties() {
 
         Properties properties = new Properties();
+
         properties.setMandatoryProperties(CustomUserStoreConstants.CUSTOM_UM_MANDATORY_PROPERTIES.toArray
-                (new Property[CustomUserStoreConstants.CUSTOM_UM_MANDATORY_PROPERTIES.size()]));
+                (new Property[0]));
         properties.setOptionalProperties(CustomUserStoreConstants.CUSTOM_UM_OPTIONAL_PROPERTIES.toArray
-                (new Property[CustomUserStoreConstants.CUSTOM_UM_OPTIONAL_PROPERTIES.size()]));
+                (new Property[0]));
         properties.setAdvancedProperties(CustomUserStoreConstants.CUSTOM_UM_ADVANCED_PROPERTIES.toArray
-                (new Property[CustomUserStoreConstants.CUSTOM_UM_ADVANCED_PROPERTIES.size()]));
+                (new Property[0]));
         return properties;
     }
 
