@@ -9,6 +9,7 @@
         <module name="org.wso2.carbon.queuing" />
         <module name="org.wso2.carbon.registry.api" />
         <module name="org.wso2.carbon.core.commons.stub" />
+        <module name="CustomUserStoreManager" />
         <module name="org.wso2.carbon.base" />
         <module name="org.wso2.carbon.server.admin.ui" />
         <module name="org.wso2.carbon.bridge" />
